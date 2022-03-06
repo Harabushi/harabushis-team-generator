@@ -1,2 +1,5 @@
 node_modules
 .DS_Store
+criteria.md
+template.html
+template.css
