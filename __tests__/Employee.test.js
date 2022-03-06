@@ -18,13 +18,13 @@ test('gets employee name', () => {
 test('gets employee id', () => {
   const employee = new Employee('Dave', 1, 'dave@email.com');
 
-  expect(employee.getID()).toEqual(expect.any(Number));
+  expect(employee.getId()).toEqual(expect.any(Number));
 })
 
 test('gets employee email', () => {
   const employee = new Employee('Dave', 1, 'dave@email.com');
 
-  expect(employee.getEmail()).toEqual(expect.toMatch('@'));
+  expect(employee.getEmail()).toEqual(expect.stringContaining('@'));
 })
 
 test('gets employee role', () => {
