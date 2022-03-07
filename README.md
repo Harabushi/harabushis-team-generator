@@ -14,6 +14,16 @@
   - [Credits](#credits)
   - [License](#license)
 
+  ## Screenshot and Walkthrough
+
+  <br>
+
+  [Walk-Through Video](https://drive.google.com/file/d/1tjhW4FCZs1BT_CC26c1YmM3S-pD6wkl2/view?usp=sharing)
+
+  <br>
+  
+  <img src="./assets/generated-HTML-screenshot.png" width=50% height=50%>
+
   ## Installation
 
   Download the app, run npm i to install relevant modules

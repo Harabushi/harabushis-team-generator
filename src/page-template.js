@@ -66,7 +66,8 @@ function templateData(teamData) {
       ${teamData
         .map((employee) => {
           return cardTemplate(employee)
-      })}
+      })
+    .join(' ')}
     </main>
   </body>
   </html>
