@@ -5,7 +5,7 @@ const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
 const generatePage = require('./src/page-template');
-const { writeFile } = require('./src/generate-site');
+const { writeFile, copyFile } = require('./src/generate-site');
 
 const team = [];
 
@@ -241,8 +241,53 @@ function init() {
     });
 };
 
+const mockData = [
+  {
+    managerName: "Colby",
+    managerId: 5,
+    managerQuestions: "colby@email.com",
+    managerOffice: 5
+  },
+  {
+    engineerName: "Colb",
+    engineerId: 4,
+    engineerQuestions: "colb@email.com",
+    engineerGithub: "colb"
+  },
+  {
+    engineerName: "Col",
+    engineerId: 3,
+    engineerQuestions: "col@email.com",
+    engineerGithub: "col"
+  },
+  {
+    internName: "Co",
+    internId: 2,
+    internQuestions: "co@email.com",
+    internSchool: "university"
+  },
+  {
+    internName: "C",
+    internId: 1,
+    internQuestions: "c@email.com",
+    internSchool: "uni"
+  },
+]
+
 init()
-  .then(teaminfo => {
-    return generatePage(teaminfo)
+  .then(() => {
+    return generatePage(team);
   })
-  .then(response)
+  .then(pageHTML => {
+    return writeFile(pageHTML);
+  })
+  .then(writeFileResponse => {
+    console.log(writeFileResponse);
+    return copyFile();
+  })
+  .then(copyFileResponse => {
+    console.log(copyFileResponse);
+  })
+  .catch(err => {
+    console.log(err);
+  });

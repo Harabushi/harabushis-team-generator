@@ -1,3 +1,5 @@
+const Employee = require("../lib/Employee");
+
 function renderIcon(role) {
   const icon = {
     Manager: '<i class="fa fa-coffee" aria-hidden="true"></i>',
@@ -9,17 +11,30 @@ function renderIcon(role) {
 }
 
 function renderUnique(employee) {
-  
-  const unique = {
-    Manager: `Office Number: ${employee.getOfficeNumber()}`,
-    Engineer: `GitHub: <a href="https://www.github.com/${employee.getGithub()}" target="_blank">${employee.getGithub()}</a>`,
-    Intern: `School: ${employee.getSchool()}`
+  // replace with if's I guess
+  // const unique = {
+  //   Manager: `Office Number: ${employee.getOfficeNumber()}`,
+  //   Engineer: `GitHub: <a href="https://www.github.com/${employee.getGithub()}" target="_blank">${employee.getGithub()}</a>`,
+  //   Intern: `School: ${employee.getSchool()}`
+  // }
+
+  if (employee.getRole() === "Manager") {
+    // console.log("Manager Card Added")
+    return `Office Number: ${employee.getOfficeNumber()}`
+  } else if (employee.getRole() === "Engineer") {
+    // console.log("Engineer Card Added")
+    return `GitHub: <a href="https://www.github.com/${employee.getGithub()}" target="_blank">${employee.getGithub()}</a>`
+  } else if (employee.getRole() === "Intern") {
+    // console.log("Intern Card Added")
+    return `School: ${employee.getSchool()}`
   }
 
-  return `${unique[employee.getRole()]}`
+  // return unique[employee.getRole()]
 }
 
 function cardTemplate(employee) {
+  //console.log(employee.getRole())
+
   return `
   <div class="card">
     <div class="card-header">
@@ -37,8 +52,9 @@ function cardTemplate(employee) {
   `
 }
 
-function templateData(team) {
-
+function templateData(teamData) {
+  // console.log(teamData)
+  // console.log(teamData[0].getName())
   return `
   <!DOCTYPE html>
   <html lang="en">
@@ -55,9 +71,9 @@ function templateData(team) {
       <h1>My Team</h1>
     </header>
     <main>
-      ${team
-      .map(({ employee }) => {
-        return cardTemplate(employee)
+      ${teamData
+        .map((employee) => {
+          return cardTemplate(employee)
       })}
     </main>
   </body>
