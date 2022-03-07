@@ -4,6 +4,9 @@ const Manager = require('./lib/Manager')
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
+const generatePage = require('./src/page-template');
+const { writeFile } = require('./src/generate-site');
+
 const team = [];
 
 const managerQuestions = [
@@ -215,7 +218,7 @@ function teamBuilder() {
           return teamBuilder();
         })
       } else {
-        console.log(team);
+        return team;
       }
     })
 }
@@ -239,3 +242,7 @@ function init() {
 };
 
 init()
+  .then(teaminfo => {
+    return generatePage(teaminfo)
+  })
+  .then(response)
