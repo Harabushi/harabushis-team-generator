@@ -1,23 +1,14 @@
-const Employee = require("../lib/Employee");
-
 function renderIcon(role) {
   const icon = {
     Manager: '<i class="fa fa-coffee" aria-hidden="true"></i>',
     Engineer: '<i class="fa fa-cog" aria-hidden="true"></i>',
     Intern: '<i class="fa fa-graduation-cap" aria-hidden="true"></i>'
   }
-
   return icon[role];
 }
 
 function renderUnique(employee) {
-  // replace with if's I guess
-  // const unique = {
-  //   Manager: `Office Number: ${employee.getOfficeNumber()}`,
-  //   Engineer: `GitHub: <a href="https://www.github.com/${employee.getGithub()}" target="_blank">${employee.getGithub()}</a>`,
-  //   Intern: `School: ${employee.getSchool()}`
-  // }
-
+  // check and format each role's unique information. not the way I wanted to do it but couldn't get that to work
   if (employee.getRole() === "Manager") {
     // console.log("Manager Card Added")
     return `Office Number: ${employee.getOfficeNumber()}`
@@ -28,12 +19,11 @@ function renderUnique(employee) {
     // console.log("Intern Card Added")
     return `School: ${employee.getSchool()}`
   }
-
-  // return unique[employee.getRole()]
 }
 
 function cardTemplate(employee) {
   //console.log(employee.getRole())
+  // templates for each employee card
 
   return `
   <div class="card">
@@ -55,6 +45,8 @@ function cardTemplate(employee) {
 function templateData(teamData) {
   // console.log(teamData)
   // console.log(teamData[0].getName())
+  // full HTML template
+
   return `
   <!DOCTYPE html>
   <html lang="en">

@@ -20,6 +20,7 @@ const writeFile = fileContent => {
 
 const copyFile = () => {
   return new Promise((resolve, reject) => {
+    // coopy stylesheet from src to dist
     fs.copyFile('./src/template.css', './dist/style.css', err => {
       if (err) {
         reject(err);

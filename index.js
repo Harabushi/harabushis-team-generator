@@ -194,11 +194,13 @@ const addConfirm = [
     message: "Would you like to add a Team Member?",
     choices: ["Add an Engineer", "Add an Intern", "Done adding Team Members"]
   }
-]
+];
 
 function teamBuilder() {
+  // check for add member or finish building team
   return inquirer.prompt(addConfirm)
     .then(response => {
+      // build engineer
       if (response.addMember === "Add an Engineer") {
         return inquirer.prompt(engineerQuestions)
         .then(engineerInfo => {
@@ -208,6 +210,7 @@ function teamBuilder() {
         .then(() => {
           return teamBuilder();
         })
+        // build intern
       } else if (response.addMember === "Add an Intern") {
         return inquirer.prompt(internQuestions)
         .then(internInfo => {
@@ -217,18 +220,19 @@ function teamBuilder() {
         .then(() => {
           return teamBuilder();
         })
+        // finish team build
       } else {
         return team;
       }
     })
-}
+};
 
 function init() {
   console.log(`
-  ====================
-  Harabushi's
-  Project Team Builder
-  ====================
+    ====================
+    Harabushi's
+    Project Team Builder
+    ====================
   `)
   return inquirer.prompt(managerQuestions)
     .then(managerInfo => {
@@ -241,52 +245,28 @@ function init() {
     });
 };
 
-const mockData = [
-  {
-    managerName: "Colby",
-    managerId: 5,
-    managerQuestions: "colby@email.com",
-    managerOffice: 5
-  },
-  {
-    engineerName: "Colb",
-    engineerId: 4,
-    engineerQuestions: "colb@email.com",
-    engineerGithub: "colb"
-  },
-  {
-    engineerName: "Col",
-    engineerId: 3,
-    engineerQuestions: "col@email.com",
-    engineerGithub: "col"
-  },
-  {
-    internName: "Co",
-    internId: 2,
-    internQuestions: "co@email.com",
-    internSchool: "university"
-  },
-  {
-    internName: "C",
-    internId: 1,
-    internQuestions: "c@email.com",
-    internSchool: "uni"
-  },
-]
-
 init()
   .then(() => {
+    // generate html template
     return generatePage(team);
   })
   .then(pageHTML => {
+    // write html to dist folder
     return writeFile(pageHTML);
   })
   .then(writeFileResponse => {
+    // copy css from template to dist
     console.log(writeFileResponse);
     return copyFile();
   })
   .then(copyFileResponse => {
     console.log(copyFileResponse);
+    console.log(`
+    ==================================
+    Your Team's Page has been Created!
+    ==================================
+    Check it out in the dist folder!
+    `)
   })
   .catch(err => {
     console.log(err);
